@@ -4,9 +4,13 @@ let startTime = null;
 let sound = null
 
 const lessons = [
-	{ id: 0, title: "មេរៀន ១ - អក្សរមូលដ្ឋាន", text: "កខគឃងចឆជឈញតថទធនបផពភមយរលវសហឡអ", instruction: "ដាក់ម្រាមដៃនៅជួរផ្ទះ (ASDF JKL;)" },
-	{ id: 1, title: "មេរៀន ២ - ស្រៈ", text: "ាិីឹឺុូើៀឿ", instruction: "វាយស្រៈខ្លីនិងវែង" },
-	{ id: 2, title: "មេរៀន ៣ - ពាក្យសាមញ្ញ", text: "ខ្មែរ សួស្តី ជំរាបសួរ ស្រុកខ្មែរ", instruction: "ព្យាយាមមិនមើលក្តារ" }
+	{ id: 0, title: "មេរៀន ១ - ជួរកណ្ដាល (Home Row)", text: "កសដថងហ្កលើ់ កសដថងហ្កលើ់ កសដថងហ្កលើ់", instruction: "ដាក់ម្រាមដៃនៅជួរកណ្ដាល (ASDF JKL;)" },
+	{ id: 1, title: "មេរៀន ២ - ជួរកណ្ដាល (Shift)", text: "ាំាំឌធអះញគឡោះ៉ ាំាំឌធអះញគឡោះ៉ ាំាំឌធអះញគឡោះ៉", instruction: "ប្រើប៊ូតុងប្ដូរ (Shift) ជាមួយជួរកណ្ដាល" },
+	{ id: 2, title: "មេរៀន ៣ - ជួរលើ (Upper Row)", text: "ឆឹេរបតយុិោផៀឪឮ ឆឹេរបតយុិោផៀឪឮ ឆឹេរបតយុិោផៀឪឮ", instruction: "វាយជួរខាងលើ" },
+	{ id: 3, title: "មេរៀន ៤ - ជួរលើ (Shift)", text: "ឈឺែឬទួូីៅភឿឧឭ ឈឺែឬទួូីៅភឿឧឭ ឈឺែឬទួូីៅភឿឧឭ", instruction: "ប្រើប៊ូតុងប្ដូរ (Shift) ជាមួយជួរលើ" },
+	{ id: 4, title: "មេរៀន ៥ - ជួរក្រោម (Lower Row)", text: "ឋខចវបនមុំ។៊ ឋខចវបនមុំ។៊ ឋខចវបនមុំ។៊", instruction: "វាយជួរខាងក្រោម" },
+	{ id: 5, title: "មេរៀន ៦ - ជួរក្រោម (Shift)", text: "ឍឃជេះពណំុះ៕? ឍឃជេះពណំុះ៕? ឍឃជេះពណំុះ៕?", instruction: "ប្រើប៊ូតុងប្ដូរ (Shift) ជាមួយជួរក្រោម" },
+	{ id: 6, title: "មេរៀន ៧ - ពាក្យសាមញ្ញ", text: "ខ្មែរ សួស្តី ជំរាបសួរ ស្រុកខ្មែរ កម្ពុជា ខ្មែរ សួស្តី ជំរាបសួរ ស្រុកខ្មែរ កម្ពុជា ខ្មែរ សួស្តី ជំរាបសួរ ស្រុកខ្មែរ កម្ពុជា", instruction: "ព្យាយាមមិនមើលក្តារ" }
 ];
 
 function buildKeyboard() {
@@ -18,22 +22,31 @@ function buildKeyboard() {
 		[['Shift', 'ប្ដូរ'], ['Z', 'ឋ', 'ឍ'], ['X', 'ខ', 'ឃ'], ['C', 'ច', 'ជ'], ['V', 'វ', 'េះ'], ['B', 'ប', 'ព'], ['N', 'ន', 'ណ'], ['M', 'ម', 'ំ'], [',', 'ុំ', 'ុះ'], ['.', '។', '៕'], ['/', '៊', '?'], ['Shift', 'ប្ដូរ']],
 		[['Ctrl', 'បញ្ជា'], [''], ['Alt', 'ជំនួស'], ['Space', 'ចន្លោះមិនឃើញ', 'ដកឃ្លា'], ['Alt Gr', 'ឆ្លាស់'], [''], [''], ['Ctrl', 'បញ្ជា']]
 	]
-	for (let row of keys) {
+	for (let rowIdx = 0; rowIdx < keys.length; rowIdx++) {
+		const row = keys[rowIdx];
 		const rowEl = document.createElement('div');
 		rowEl.classList.add('kb-row');
-		for (let key of row) {
+		for (let keyIdx = 0; keyIdx < row.length; keyIdx++) {
+			const key = row[keyIdx];
 			const keyEl = document.createElement('div');
 			keyEl.classList.add('key');
-			key.forEach((key, index) => {
+			
+			// Add specific classes for Shift keys
+			if (key[0] === 'Shift') {
+				if (keyIdx === 0) keyEl.classList.add('shift-left');
+				else keyEl.classList.add('shift-right');
+			}
+
+			key.forEach((keyText, index) => {
 				const span = document.createElement('span');
-				span.textContent = key;
+				span.textContent = keyText;
 				keyEl.appendChild(span);
-				if (key === 'Backspace') keyEl.style.minWidth = '100px';
-				else if (key === 'Tab' || key === '\\') keyEl.style.minWidth = '77px';
-				else if (key === 'CapsLock' || key === 'Enter') keyEl.style.minWidth = '107px';
-				else if (key === 'Shift') keyEl.style.minWidth = '137px';
-				else if (key === 'Space') keyEl.classList.add('space');
-				else if (key === 'Ctrl' || key === 'Alt' || key === 'Alt Gr' || key === '') keyEl.style.minWidth = '72px';
+				if (keyText === 'Backspace') keyEl.style.minWidth = '100px';
+				else if (keyText === 'Tab' || keyText === '\\') keyEl.style.minWidth = '77px';
+				else if (keyText === 'CapsLock' || keyText === 'Enter') keyEl.style.minWidth = '107px';
+				else if (keyText === 'Shift') keyEl.style.minWidth = '137px';
+				else if (keyText === 'Space') keyEl.classList.add('space');
+				else if (keyText === 'Ctrl' || keyText === 'Alt' || keyText === 'Alt Gr' || keyText === '') keyEl.style.minWidth = '72px';
 			});
 
 			rowEl.appendChild(keyEl);
@@ -43,11 +56,27 @@ function buildKeyboard() {
 }
 
 function highlightKey(char) {
+	document.querySelectorAll('.key').forEach(k => k.classList.remove('highlight'));
+	
+	const fingerMap = {
+		'ឆ': 'l', 'ឈ': 'l', 'ឹ': 'l', 'ឺ': 'l', 'េ': 'l', 'ែ': 'l', 'រ': 'l', 'ឬ': 'l', 'ត': 'l', 'ទ': 'l',
+		'យ': 'r', 'ួ': 'r', 'ុ': 'r', 'ូ': 'r', 'ិ': 'r', 'ី': 'r', 'ោ': 'r', 'ៅ': 'r', 'ផ': 'r', 'ភ': 'r',
+		'ា': 'l', 'ាំ': 'l', 'ស': 'l', 'ដ': 'l', 'ឌ': 'l', 'ថ': 'l', 'ធ': 'l', 'ង': 'l', 'អ': 'l',
+		'ហ': 'r', 'ះ': 'r', '្': 'r', 'ញ': 'r', 'ក': 'r', 'គ': 'r', 'ល': 'r', 'ឡ': 'r', 'ើ': 'r', 'ោះ': 'r', '់': 'r', '៉': 'r',
+		'ឋ': 'l', 'ឍ': 'l', 'ខ': 'l', 'ឃ': 'l', 'ច': 'l', 'ជ': 'l', 'វ': 'l', 'េះ': 'l', 'ប': 'l', 'ព': 'l',
+		'ន': 'r', 'ណ': 'r', 'ម': 'r', 'ំ': 'r', 'ុំ': 'r', 'ុះ': 'r', '។': 'r', '៕': 'r', '៊': 'r', '?': 'r'
+	};
+
 	document.querySelectorAll('.key').forEach(k => {
-		k.classList.remove('highlight');
 		const children = Array.from(k.children).map(s => s.textContent);
 		if (children.includes(char)) {
 			k.classList.add('highlight');
+			// If character is at index 2 (shifted position), highlight the opposite Shift key
+			if (children[2] === char) {
+				const hand = fingerMap[char] || 'r';
+				const shiftClass = (hand === 'l') ? '.shift-right' : '.shift-left';
+				document.querySelector(shiftClass).classList.add('highlight');
+			}
 		}
 	});
 }
@@ -56,15 +85,19 @@ function highlightFinger(char) {
 	// Reset all
 	document.querySelectorAll('.finger').forEach(f => f.classList.remove('highlight'));
 
-	// Simple realistic mapping for Khmer
+	// Mapping based on QWERTY positions for Khmer layout
 	const map = {
-		'ក': 'r-middle', 'ខ': 'l-index', 'គ': 'l-middle', 'ឃ': 'l-ring',
-		'ង': 'l-pinky', 'ច': 'r-index', 'ជ': 'r-index', 'ឈ': 'r-middle',
-		'ត': 'l-index', 'ថ': 'l-middle', 'ទ': 'r-index', 'ធ': 'r-middle',
-		'ន': 'r-ring', 'ប': 'l-index', 'ផ': 'l-middle', 'ព': 'r-index',
-		'ម': 'r-middle', 'យ': 'l-index', 'រ': 'l-middle', 'ល': 'l-ring',
-		'វ': 'r-index', 'ស': 'l-ring', 'ហ': 'r-index', 'ឡ': 'l-pinky',
-		'ា': 'l-index', 'ិ': 'l-middle', 'ុ': 'r-index'
+		// Row 1
+		'ឆ': 'l-pinky', 'ឈ': 'l-pinky', 'ឹ': 'l-ring', 'ឺ': 'l-ring', 'េ': 'l-middle', 'ែ': 'l-middle', 'រ': 'l-index', 'ឬ': 'l-index', 'ត': 'l-index', 'ទ': 'l-index',
+		'យ': 'r-index', 'ួ': 'r-index', 'ុ': 'r-index', 'ូ': 'r-index', 'ិ': 'r-middle', 'ី': 'r-middle', 'ោ': 'r-ring', 'ៅ': 'r-ring', 'ផ': 'r-pinky', 'ភ': 'r-pinky',
+		// Row 2
+		'ា': 'l-pinky', 'ាំ': 'l-pinky', 'ស': 'l-ring', 'ដ': 'l-middle', 'ឌ': 'l-middle', 'ថ': 'l-index', 'ធ': 'l-index', 'ង': 'l-index', 'អ': 'l-index',
+		'ហ': 'r-index', 'ះ': 'r-index', '្': 'r-index', 'ញ': 'r-index', 'ក': 'r-middle', 'គ': 'r-middle', 'ល': 'r-ring', 'ឡ': 'r-ring', 'ើ': 'r-pinky', 'ោះ': 'r-pinky', '់': 'r-pinky', '៉': 'r-pinky',
+		// Row 3
+		'ឋ': 'l-pinky', 'ឍ': 'l-pinky', 'ខ': 'l-ring', 'ឃ': 'l-ring', 'ច': 'l-middle', 'ជ': 'l-middle', 'វ': 'l-index', 'េះ': 'l-index', 'ប': 'l-index', 'ព': 'l-index',
+		'ន': 'r-index', 'ណ': 'r-index', 'ម': 'r-index', 'ំ': 'r-index', 'ុំ': 'r-middle', 'ុះ': 'r-middle', '។': 'r-ring', '៕': 'r-ring', '៊': 'r-pinky', '?': 'r-pinky',
+		// Others
+		' ': 'r-index'
 	};
 
 	const fingerId = map[char] || 'r-index';
@@ -82,40 +115,46 @@ function loadLesson(index) {
 }
 
 function updateDisplay(target) {
-	let html = "";
-	for (let i = 0; i < target.length; i++) {
-		if (i < typed.length) {
-			html += `<span class="typed">${target[i]}</span>`;
-		} else if (i === typed.length) {
-			html += `<span class="current">${target[i]}</span>`;
-			highlightKey(target[i]);
-		} else {
-			html += target[i];
-		}
+	const displayEl = document.getElementById('text-to-type');
+	if (typed.length >= target.length) {
+		displayEl.innerHTML = `<div style="display:flex; align-items:center; justify-content:center; height:100%; color:#27ae60; font-size:2rem;">✅ រួចរាល់!</div>`;
+		return;
 	}
-	document.getElementById('text-to-type').innerHTML = html;
+
+	const char = target[typed.length];
+	displayEl.innerHTML = `
+		<div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%;">
+			<div style="font-size: 4rem; font-weight: bold; color: #2c3e50;">${char === " " ? "␣" : char}</div>
+		</div>
+	`;
+	
+	highlightKey(char);
+	highlightFinger(char);
 }
 
 document.addEventListener('keydown', (e) => {
+	// Ignore modifier keys
+	if (["Shift", "Control", "Alt", "Meta", "CapsLock"].includes(e.key)) {
+		return;
+	}
+
 	const target = lessons[currentLessonIndex].text;
 
 	if (!startTime) startTime = Date.now();
-	if (target[typed.length] !== e.key) {
-		playSound();
-	} else if (e.key === "Backspace") {
+
+	if (e.key === "Backspace") {
 		typed = typed.slice(0, -1);
 	} else if (e.key.length === 1) {
-		typed += e.key;
-		const nextChar = target[typed.length - 1];
-		if (nextChar) {
-			highlightKey(nextChar);
-			highlightFinger(nextChar);
+		if (target[typed.length] === e.key) {
+			typed += e.key;
+		} else {
+			playSound();
 		}
 	}
 
 	updateDisplay(target);
 
-	if (typed.length >= target.length) {
+	if (typed.length >= target.length && target.length > 0) {
 		alert("✅ រួចរាល់! ស្ថិតិនឹងត្រូវបានបន្ថែមក្នុងកំណែក្រោយ។");
 	}
 });

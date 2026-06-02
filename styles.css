@@ -13,12 +13,15 @@
 body {
 	font-family: 'Hanuman', sans-serif;
 	background: #2c3e50;
-	padding: 20px;
+	padding: 10px;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .container {
 	width: 1084px;
-	margin: 0 auto;
 	background: white;
 	border-radius: 12px;
 	overflow: hidden;
@@ -28,87 +31,84 @@ body {
 .menu {
 	background: #34495e;
 	color: white;
-	padding: 12px 20px;
+	padding: 8px 15px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
+.menu h2 {
+	font-size: 1.2rem;
+}
+
 .main {
-	display: grid;
-	grid-template-rows: auto 1fr auto;
-	gap: 8px;
-	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	padding: 8px;
 }
 
 .row2 {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 8px;
+	grid-template-columns: 1.2fr 1fr;
+	gap: 6px;
 }
 
 .row3 {
 	display: grid;
-	grid-template-columns: 1fr;
-	gap: 8px;
+	grid-template-columns: 1fr 300px;
+	gap: 6px;
 }
 
 .panel {
 	background: #f8f9fa;
 	border: 1px solid #ddd;
 	border-radius: 8px;
-	padding: 12px;
+	padding: 10px;
 }
 
-h3 {
+.panel h3 {
+	font-size: 0.9rem;
 	color: #2c3e50;
-	margin-bottom: 8px;
+	margin-bottom: 5px;
 }
 
 #text-to-type {
-	font-size: 1.55rem;
-	line-height: 2.3;
-	min-height: 140px;
+	height: 160px;
 	background: white;
-	padding: 15px;
+	padding: 0;
 	border-radius: 6px;
 }
 
-.typed {
-	color: #666;
-}
-
-.current {
-	color: #27ae60;
-	background: #d4edda;
-	padding: 2px 6px;
-	border-radius: 4px;
+#lesson-content {
+	height: 160px;
+	overflow-y: auto;
 }
 
 /* === Realistic QWERTY Keyboard === */
 .keyboard {
 	background: #2c3e50;
-	padding: 15px;
+	padding: 10px;
 	border-radius: 8px;
 }
 
 .kb-row {
 	display: flex;
-	gap: 4px;
-	margin-bottom: 4px;
+	gap: 3px;
+	margin-bottom: 3px;
 	justify-content: center;
 }
 
 .key {
 	background: #ecf0f1;
 	color: #2c3e50;
-	min-width: 56px;
-	height: 56px;
+	min-width: 50px;
+	height: 50px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-radius: 4px;
-	font-size: 12pt;
+	font-size: 11pt;
 	font-weight: bold;
 	border: 2px solid #bdc3c7;
 	transition: all 0.2s;
@@ -122,13 +122,13 @@ h3 {
 }
 
 .key span:first-child {
-	left: var(--key-padding);
-	top: var(--key-padding);
+	left: 4px;
+	top: 4px;
 }
 
 .key span:first-child:has(~span:nth-child(3)) {
-	left: var(--key-padding);
-	bottom: var(--key-padding);
+	left: 4px;
+	bottom: 4px;
 	top: unset;
 }
 
@@ -137,13 +137,13 @@ h3 {
 }
 
 .key span:nth-child(2) {
-	right: var(--key-padding);
-	bottom: var(--key-padding);
+	right: 4px;
+	bottom: 4px;
 }
 
 .key span:nth-child(3) {
-	right: var(--key-padding);
-	top: var(--key-padding);
+	right: 4px;
+	top: 4px;
 }
 
 .key.highlight {
@@ -152,41 +152,43 @@ h3 {
 	transform: scale(1.05);
 }
 
-.key.wide {
-	min-width: 70px;
-}
-
 .key.space {
-	min-width: 345px;
-	font-size: 0.9rem;
+	min-width: 320px;
 }
 
 /* Fingers */
 .fingers {
 	background: #2c3e50;
 	color: white;
-	padding: 20px;
+	padding: 10px;
 	border-radius: 8px;
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
 }
 
 .hand {
-	text-align: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 4px;
+	margin-bottom: 5px;
 }
 
 .hand-label {
-	font-size: 1.1rem;
-	margin-bottom: 8px;
+	font-size: 0.8rem;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 2px;
 }
 
 .finger {
-	font-size: 1.6rem;
-	margin: 8px 6px;
+	font-size: 1.1rem;
 	transition: all 0.2s;
 }
 
 .finger.highlight {
 	color: #2ecc71;
-	transform: scale(1.3);
+	transform: scale(1.2);
 }
