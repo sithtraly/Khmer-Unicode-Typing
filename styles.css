@@ -18,6 +18,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	overflow: hidden;
 }
 
 .container {
@@ -44,20 +45,20 @@ body {
 .main {
 	display: flex;
 	flex-direction: column;
-	gap: 6px;
-	padding: 8px;
+	gap: 8px;
+	padding: 10px;
 }
 
 .row2 {
 	display: grid;
 	grid-template-columns: 1.2fr 1fr;
-	gap: 6px;
+	gap: 8px;
 }
 
 .row3 {
-	display: grid;
-	grid-template-columns: 1fr 300px;
-	gap: 6px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
 }
 
 .panel {
@@ -70,45 +71,48 @@ body {
 .panel h3 {
 	font-size: 0.9rem;
 	color: #2c3e50;
-	margin-bottom: 5px;
+	margin-bottom: 6px;
 }
 
 #text-to-type {
-	height: 160px;
+	height: 120px;
 	background: white;
 	padding: 0;
 	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 #lesson-content {
-	height: 160px;
+	height: 120px;
 	overflow-y: auto;
 }
 
 /* === Realistic QWERTY Keyboard === */
 .keyboard {
 	background: #2c3e50;
-	padding: 10px;
+	padding: 15px;
 	border-radius: 8px;
 }
 
 .kb-row {
 	display: flex;
-	gap: 3px;
-	margin-bottom: 3px;
+	gap: 4px;
+	margin-bottom: 4px;
 	justify-content: center;
 }
 
 .key {
 	background: #ecf0f1;
 	color: #2c3e50;
-	min-width: 50px;
-	height: 50px;
+	min-width: 56px;
+	height: 56px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-radius: 4px;
-	font-size: 11pt;
+	font-size: 12pt;
 	font-weight: bold;
 	border: 2px solid #bdc3c7;
 	transition: all 0.2s;
@@ -122,13 +126,13 @@ body {
 }
 
 .key span:first-child {
-	left: 4px;
-	top: 4px;
+	left: 6px;
+	top: 6px;
 }
 
 .key span:first-child:has(~span:nth-child(3)) {
-	left: 4px;
-	bottom: 4px;
+	left: 6px;
+	bottom: 6px;
 	top: unset;
 }
 
@@ -137,13 +141,13 @@ body {
 }
 
 .key span:nth-child(2) {
-	right: 4px;
-	bottom: 4px;
+	right: 6px;
+	bottom: 6px;
 }
 
 .key span:nth-child(3) {
-	right: 4px;
-	top: 4px;
+	right: 6px;
+	top: 6px;
 }
 
 .key.highlight {
@@ -153,42 +157,39 @@ body {
 }
 
 .key.space {
-	min-width: 320px;
+	min-width: 345px;
 }
 
 /* Fingers */
 .fingers {
 	background: #2c3e50;
 	color: white;
-	padding: 10px;
+	padding: 10px 30px;
 	border-radius: 8px;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	height: 100%;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .hand {
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 4px;
-	margin-bottom: 5px;
+	align-items: center;
+	gap: 20px;
 }
 
 .hand-label {
-	font-size: 0.8rem;
-	width: 100%;
-	text-align: center;
-	margin-bottom: 2px;
+	font-size: 1rem;
+	margin-right: 15px;
+	font-weight: bold;
+	color: #bdc3c7;
 }
 
 .finger {
-	font-size: 1.1rem;
+	font-size: 1.5rem;
 	transition: all 0.2s;
 }
 
 .finger.highlight {
 	color: #2ecc71;
-	transform: scale(1.2);
+	transform: scale(1.3);
 }
