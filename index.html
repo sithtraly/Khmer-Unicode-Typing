@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ឧបករណ៍ហាត់វាយខ្មែរ</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<div class="container">
+		<!-- M: Menu -->
+		<div class="menu">
+			<h2>ឧបករណ៍ហាត់វាយអក្សរខ្មែរ</h2>
+			<div>
+				<select id="lesson-select" onchange="loadLesson(this.value)"></select>
+				<button onclick="toggleOS()">OS: <span id="os-name">Windows</span></button>
+				<button onclick="showHelp()">ជំនួយ</button>
+			</div>
+		</div>
+
+		<div class="main">
+			<!-- Row 2: A B C -->
+			<div class="row2">
+				<div class="panel">
+					<h3>A. អត្ថបទដែលត្រូវវាយ</h3>
+					<div id="text-to-type"></div>
+				</div>
+				<div class="panel">
+					<h3>B. មេរៀន</h3>
+					<div id="lesson-content" style="font-size:1.35rem; line-height:2;"></div>
+				</div>
+			</div>
+
+			<!-- Row 3: D E -->
+			<div class="row3">
+				<!-- D: Keyboard -->
+				<div class="panel">
+					<h3>D. ក្តារចុច QWERTY</h3>
+					<div id="keyboard" class="keyboard"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="index.js"></script>
+</body>
+
+</html>

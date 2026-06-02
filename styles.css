@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanuman:wght@400;700&display=swap');
+
+:root {
+	--key-padding: 6px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Hanuman', sans-serif;
+	background: #2c3e50;
+	padding: 20px;
+}
+
+.container {
+	width: 1084px;
+	margin: 0 auto;
+	background: white;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.menu {
+	background: #34495e;
+	color: white;
+	padding: 12px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.main {
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	gap: 8px;
+	padding: 10px;
+}
+
+.row2 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+}
+
+.row3 {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 8px;
+}
+
+.panel {
+	background: #f8f9fa;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 12px;
+}
+
+h3 {
+	color: #2c3e50;
+	margin-bottom: 8px;
+}
+
+#text-to-type {
+	font-size: 1.55rem;
+	line-height: 2.3;
+	min-height: 140px;
+	background: white;
+	padding: 15px;
+	border-radius: 6px;
+}
+
+.typed {
+	color: #666;
+}
+
+.current {
+	color: #27ae60;
+	background: #d4edda;
+	padding: 2px 6px;
+	border-radius: 4px;
+}
+
+/* === Realistic QWERTY Keyboard === */
+.keyboard {
+	background: #2c3e50;
+	padding: 15px;
+	border-radius: 8px;
+}
+
+.kb-row {
+	display: flex;
+	gap: 4px;
+	margin-bottom: 4px;
+	justify-content: center;
+}
+
+.key {
+	background: #ecf0f1;
+	color: #2c3e50;
+	min-width: 56px;
+	height: 56px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	font-size: 12pt;
+	font-weight: bold;
+	border: 2px solid #bdc3c7;
+	transition: all 0.2s;
+	position: relative;
+}
+
+.key span {
+	display: block;
+	line-height: 1;
+	position: absolute;
+}
+
+.key span:first-child {
+	left: var(--key-padding);
+	top: var(--key-padding);
+}
+
+.key span:first-child:has(~span:nth-child(3)) {
+	left: var(--key-padding);
+	bottom: var(--key-padding);
+	top: unset;
+}
+
+.key span:first-child:not(:has(~span:nth-child(2))) {
+	position: static;
+}
+
+.key span:nth-child(2) {
+	right: var(--key-padding);
+	bottom: var(--key-padding);
+}
+
+.key span:nth-child(3) {
+	right: var(--key-padding);
+	top: var(--key-padding);
+}
+
+.key.highlight {
+	background: #2ecc71 !important;
+	color: white;
+	transform: scale(1.05);
+}
+
+.key.wide {
+	min-width: 70px;
+}
+
+.key.space {
+	min-width: 345px;
+	font-size: 0.9rem;
+}
+
+/* Fingers */
+.fingers {
+	background: #2c3e50;
+	color: white;
+	padding: 20px;
+	border-radius: 8px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.hand {
+	text-align: center;
+}
+
+.hand-label {
+	font-size: 1.1rem;
+	margin-bottom: 8px;
+}
+
+.finger {
+	font-size: 1.6rem;
+	margin: 8px 6px;
+	transition: all 0.2s;
+}
+
+.finger.highlight {
+	color: #2ecc71;
+	transform: scale(1.3);
+}
