@@ -259,12 +259,6 @@ document.addEventListener('keydown', (e) => {
 	updateDisplay();
 });
 
-function toggleOS() {
-	const osList = ["Windows", "macOS", "Linux"];
-	currentOS = osList[(osList.indexOf(document.getElementById('os-name').textContent) + 1) % 3];
-	document.getElementById('os-name').textContent = currentOS;
-}
-
 function showHelp() {
 	alert("✅ បើក Khmer Unicode Keyboard មុន\n✅ វាយតាមអក្សរពណ៌បៃតង\n✅ រក្សាម្រាមដៃត្រឹមត្រូវ");
 }
