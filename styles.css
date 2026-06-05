@@ -188,6 +188,11 @@ body {
 	top: 6px;
 }
 
+.key span:nth-child(4) {
+	left: 6px;
+	top: 6px;
+}
+
 .key.highlight {
 	background: #2ecc71 !important;
 	color: white;
