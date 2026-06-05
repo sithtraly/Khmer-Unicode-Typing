@@ -1,0 +1,25 @@
+{
+  "name": "khmer-unicode-typing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sithtraly/Khmer-Unicode-Typing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sithtraly/Khmer-Unicode-Typing/issues"
+  },
+  "homepage": "https://github.com/sithtraly/Khmer-Unicode-Typing#readme",
+  "devDependencies": {
+    "inliner": "^1.13.1",
+    "terser": "^5.48.0"
+  }
+}
