@@ -88,6 +88,7 @@ function buildKeyboard() {
 				else if (keyText === 'Shift') keyEl.style.minWidth = '137px';
 				else if (keyText === 'Space') keyEl.classList.add('space');
 				else if (keyText === 'Ctrl' || keyText === 'Alt' || keyText === 'Alt Gr' || keyText === '') keyEl.style.minWidth = '72px';
+				if (keyText === 'Alt Gr') keyEl.classList.add('alt-gr');
 			});
 			rowEl.appendChild(keyEl);
 		}
@@ -120,6 +121,9 @@ function highlightKey(char) {
 				const shiftClass = (hand === 'l') ? '.shift-right' : '.shift-left';
 				const shiftEl = document.querySelector(shiftClass);
 				if (shiftEl) shiftEl.classList.add('highlight');
+			}
+			if (children[3]) {
+				document.querySelector('.alt-gr').classList.add('highlight');
 			}
 		}
 	});
