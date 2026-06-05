@@ -15,7 +15,8 @@
 		<div class="menu">
 			<h2>ឧបករណ៍ហាត់វាយអក្សរខ្មែរ</h2>
 			<div>
-				<select id="lesson-select" onchange="loadLesson(this.value)"></select>
+				<label for="lesson-select">ជ្រើសរើសមេរៀន៖</label>
+				<select name="lesson" id="lesson-select" onchange="loadLesson(this.value)"></select>
 				<button onclick="showHelp()">ជំនួយ</button>
 			</div>
 		</div>
@@ -24,12 +25,12 @@
 			<!-- Row 2: A B C -->
 			<div class="row2">
 				<div class="panel">
-					<h3 style="margin: 0;">A. អត្ថបទដែលត្រូវវាយ</h3>
+					<h3 class="m-0">A. អត្ថបទដែលត្រូវវាយ</h3>
 					<div id="text-to-type"></div>
 				</div>
 				<div class="panel">
 					<h3>B. មេរៀន</h3>
-					<div id="lesson-content" style="font-size:1.35rem; line-height:2;"></div>
+					<div id="lesson-content"></div>
 				</div>
 			</div>
 
