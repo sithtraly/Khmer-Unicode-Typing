@@ -233,6 +233,11 @@ function handleCompletionAction() {
 }
 
 document.addEventListener('keydown', (e) => {
+	if (e.getModifierState('CapsLock')) {
+		alter('អ្នកបើកបើកប្ដូរជាប់ (Caps Lock) សូមបិទមុនពេលវាយ');
+		return; // Ignore input when Caps Lock is on
+	}
+	const isAltGr = e.getModifierState('AltGraph')
 	const lesson = lessons[currentLessonIndex];
 
 	if (currentPos >= lesson.text.length) {
@@ -240,7 +245,7 @@ document.addEventListener('keydown', (e) => {
 		return;
 	}
 
-	if (["Shift", "Control", "Alt", "Meta", "CapsLock"].includes(e.key)) return;
+	if (["Shift", "Control", "Alt", "Meta", "CapsLock"].includes(e.key) || (isAltGr && e.code === 'AltRight')) return;
 
 	if (!startTime) startTime = Date.now();
 
@@ -264,8 +269,21 @@ document.addEventListener('keydown', (e) => {
 			else if (e.code === 'Comma') normalizedInput = 'ុះ';
 			else if (e.code === 'KeyA') normalizedInput = 'ាំ';
 			else if (e.code === 'KeyV') normalizedInput = 'េះ';
+			else if (e.code === 'Slash') normalizedInput = '?';
 			else normalizedInput = inputKey;
 		} else if (e.code === 'Comma' && !e.shiftKey) normalizedInput = 'ុំ';
+		else if (isAltGr) {
+			if (e.code === 'KeyE') normalizedInput = 'ឯ';
+			else if (e.code === 'KeyR') normalizedInput = 'ឫ';
+			else if (e.code === 'KeyI') normalizedInput = 'ឦ';
+			else if (e.code === 'KeyO') normalizedInput = 'ឱ';
+			else if (e.code === 'KeyP') normalizedInput = 'ឰ';
+			else if (e.code === 'BracketLeft') normalizedInput = 'ឩ';
+			else if (e.code === 'BracketRight') normalizedInput = 'ឳ';
+			else if (e.code === 'Semicolon') normalizedInput = '៖';
+			else if (e.code === 'Quote') normalizedInput = 'ៈ';
+			else if (e.code === 'Comma') normalizedInput = '/';
+		}
 		else normalizedInput = inputKey;
 
 		const normalizedTarget = targetUnit.normalize('NFC');
