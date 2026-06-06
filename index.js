@@ -122,7 +122,7 @@ function highlightKey(char) {
 				const shiftEl = document.querySelector(shiftClass);
 				if (shiftEl) shiftEl.classList.add('highlight');
 			}
-			if (children[3]) {
+			if (children[3] === char) {
 				document.querySelector('.alt-gr').classList.add('highlight');
 			}
 		}
