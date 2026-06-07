@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node build.js",
+    "build": "node build.js output=\"Khmer Unicode Typing.html\"",
     "start": "http-server -c-1 -p 8000"
   },
   "repository": {
