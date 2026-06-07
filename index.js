@@ -77,6 +77,9 @@ function buildKeyboard() {
 				if (keyIdx === 0) keyEl.classList.add('shift-left');
 				else keyEl.classList.add('shift-right');
 			}
+			if (key[0] === 'CapsLock') {
+				keyEl.classList.add('caps-lock-key');
+			}
 
 			key.forEach((keyText, index) => {
 				const span = document.createElement('span');
@@ -185,6 +188,12 @@ function updateDisplay() {
 	}
 	lessonContentEl.innerHTML = lessonHtml;
 
+	// Scroll active unit into view
+	const activeSpan = lessonContentEl.querySelector('span');
+	if (activeSpan) {
+		activeSpan.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+	}
+
 	// lesson completed
 	if (currentPos >= lesson.text.length) {
 		const endTime = new Date()
@@ -236,9 +245,21 @@ function handleCompletionAction() {
 	}
 }
 
+function updateCapsLockIndicator(e) {
+	const capsLockKey = document.querySelector('.caps-lock-key');
+	if (capsLockKey) {
+		if (e.getModifierState('CapsLock')) {
+			capsLockKey.classList.add('active');
+		} else {
+			capsLockKey.classList.remove('active');
+		}
+	}
+}
+
 document.addEventListener('keydown', (e) => {
+	updateCapsLockIndicator(e);
 	if (e.getModifierState('CapsLock')) {
-		alter('អ្នកបើកបើកប្ដូរជាប់ (Caps Lock) សូមបិទមុនពេលវាយ');
+		// alert('អ្នកបើកបើកប្ដូរជាប់ (Caps Lock) សូមបិទមុនពេលវាយ');
 		return; // Ignore input when Caps Lock is on
 	}
 	const isAltGr = e.getModifierState('AltGraph')
@@ -303,6 +324,10 @@ document.addEventListener('keydown', (e) => {
 	}
 
 	updateDisplay();
+});
+
+document.addEventListener('keyup', (e) => {
+	updateCapsLockIndicator(e);
 });
 
 function showHelp() {

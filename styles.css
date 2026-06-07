@@ -203,6 +203,22 @@ body {
 	top: 6px;
 }
 
+.caps-lock-key {
+	position: relative;
+}
+
+.caps-lock-key.active::after {
+	content: '';
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 8px;
+	height: 8px;
+	background-color: #ff4d4d;
+	border-radius: 50%;
+	box-shadow: 0 0 5px rgba(255, 77, 77, 0.8);
+}
+
 .key.highlight {
 	background: #2ecc71 !important;
 	color: white;
