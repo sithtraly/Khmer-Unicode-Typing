@@ -8,9 +8,10 @@ const terser = require('terser');
 (async () => {
 	const buildPath = path.join(__dirname, 'dist')
 
-	if (!fs.existsSync(buildPath)) {
-		fs.mkdirSync(buildPath)
+	if (fs.existsSync(buildPath)) {
+		fs.rmSync(buildPath, { recursive: true })
 	}
+	fs.mkdirSync(buildPath, { recursive: true })
 
 	const js = fs.readFileSync(path.join(__dirname, 'index.js'), 'utf-8')
 	const options = {
@@ -24,13 +25,30 @@ const terser = require('terser');
 		},
 	}
 	const minified = await terser.minify(js, options)
-	fs.writeFileSync(path.join(buildPath, 'index.js'), minified.code)
+	
+	let html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf-8')
+		.replace('<script src="index.js"></script>', `<script>${minified.code}</script>`)
 
-	fs.copyFileSync(path.join(__dirname, 'index.html'), path.join(buildPath, 'index.html'))
-	fs.copyFileSync(path.join(__dirname, 'styles.css'), path.join(buildPath, 'styles.css'))
+	// Manually inline audio files as inliner doesn't support <audio> tags
+	const audiosDir = path.join(__dirname, 'audios')
+	if (fs.existsSync(audiosDir)) {
+		const audioFiles = fs.readdirSync(audiosDir)
+		audioFiles.forEach(file => {
+			const audioPath = path.join(audiosDir, file)
+			const ext = path.extname(file).toLowerCase()
+			const mimeType = ext === '.mp3' ? 'audio/mpeg' : `audio/${ext.slice(1)}`
+			const audioBase64 = fs.readFileSync(audioPath).toString('base64')
+			const dataUri = `data:${mimeType};base64,${audioBase64}`
+			html = html.replace(`src="audios/${file}"`, `src="${dataUri}"`)
+		})
+	}
 
-	new Inliner(path.join(buildPath, 'index.html'), {
+	new Inliner(html, {
 		compress: true,
+		images: true,
+		scripts: true,
+		styles: true,
+		links: true,
 	}, (err, html) => {
 		if (err) {
 			console.error('Error inlining HTML:', err)
@@ -38,8 +56,5 @@ const terser = require('terser');
 		}
 		fs.writeFileSync(path.join(buildPath, 'Khmer Unicode Typing.html'), html)
 		console.log('Build completed successfully!')
-		fs.rmSync(path.join(buildPath, 'index.html'))
-		fs.rmSync(path.join(buildPath, 'styles.css'))
-		fs.rmSync(path.join(buildPath, 'index.js'))
 	})
 })();

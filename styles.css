@@ -59,6 +59,10 @@ body {
 	overflow: hidden;
 }
 
+.d-none  {
+	display: none;
+}
+
 .m-0 {
 	margin: 0;
 }
