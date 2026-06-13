@@ -18,7 +18,11 @@
 			<div>
 				<label for="lesson-select">ជ្រើសរើសមេរៀន៖</label>
 				<select name="lesson" id="lesson-select" onchange="loadLesson(this.value, this)"></select>
-				<button onclick="showHelp()">ជំនួយ</button>
+				<label for="show-keyboard" class="ms-2">បង្ហាញក្ដាចុច</label>
+				<input type="checkbox" name="show-keyboard" id="show-keyboard" checked>
+				<label for="highlight-key" class="ms-2">បន្លិចគ្រាប់ចុច</label>
+				<input type="checkbox" name="highlight-key" id="highlight-key" checked>
+				<button onclick="showHelp()" class="ms-2">ជំនួយ</button>
 			</div>
 		</div>
 

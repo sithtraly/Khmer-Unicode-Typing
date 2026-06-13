@@ -352,3 +352,14 @@ window.onload = () => {
 	});
 	loadLesson(0);
 };
+
+document.querySelector('#show-keyboard').addEventListener('change', e => {
+	document.querySelector('.row3').style.opacity = e.target.checked ? '100%' : '0'
+	document.querySelector('#highlight-key').disabled = !e.target.checked
+})
+
+document.querySelector('#highlight-key').addEventListener('change', e => {
+	Array.from(document.querySelectorAll('.key')).forEach(el => {
+		e.target.checked ? el.classList.remove('no-highlight') : el.classList.add('no-highlight')
+	})
+})
